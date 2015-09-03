@@ -1,5 +1,15 @@
-# converter
-Convert video to H265
+# Video converter
+
+Convert video to h265 with constant quality and add mkv metadata and poster.
+
+## Requirement
+
+* Handbrake
+* mvkmerge
+
+### Install for debian like system
+
+* ``apt-get install ``
 
 ## Library to build kvm globals tags file.
 
