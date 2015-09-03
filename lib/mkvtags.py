@@ -8,14 +8,12 @@ import os
 class BuildTag(object):
 
     def __init__(self, destination='.'):
-        self.root = etree.XML('''<!DOCTYPE Tags SYSTEM "matroskatags.dtd"><Tags></Tags>''')
         self.destination = destination
 
     def serie(self, serie, seasons, episodes, lang='fre'):
         for episode in episodes:
+            Tags = etree.XML('''<!DOCTYPE Tags SYSTEM "matroskatags.dtd"><Tags></Tags>''')
             season = seasons[episode['seasonid']]
-
-            Tags = etree.SubElement(self.root, "Tags")
 
             serieTag = etree.SubElement(Tags, "Tag")
             self._buildSerie(serieTag, serie, lang)
@@ -26,7 +24,7 @@ class BuildTag(object):
             episodeTag = etree.SubElement(Tags, "Tag")
             self._buildEpisode(episodeTag, episode, lang)
 
-            root = etree.ElementTree(self.root)
+            root = etree.ElementTree(Tags)
             # root.write(sys.stdout, pretty_print=True, xml_declaration=True, encoding="UTF8")
             filename = "{}-S{}E{}-{}.xml".format(serie['name'].encode('utf8'), str(episode['season']).zfill(2), str(episode['episode']).zfill(2), episode['title'].encode('utf8'))
             root.write(os.path.join(self.destination, filename), pretty_print=True, xml_declaration=True, encoding="UTF8")

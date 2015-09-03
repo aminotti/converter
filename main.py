@@ -9,8 +9,8 @@ from lib.mkvtags import BuildTag
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Create mkv tag files from TheTVDB for series.')
-    parser.add_argument('-p', '--path', help='Path to output directory', default='.')
     parser.add_argument('--id', help="""The TVDB identifier of the serie return by 'http://thetvdb.com/api/GetSeries.php?seriesname=<name>&language=<lang>'.""", required=True)
+    parser.add_argument('-p', '--path', help='Path to output directory', default='.')
 
     args = parser.parse_args()
 
