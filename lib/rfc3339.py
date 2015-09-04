@@ -29,3 +29,14 @@ class Rfc3339(object):
         except:
             pass
         return string
+
+    @staticmethod
+    def reverse(date):
+        if type(date) is datetime.date:
+            return date.strftime('%Y-%m-%d')
+        elif type(date) is datetime.time:
+            return date.strftime('%H:%M:%S')
+        elif type(date) is datetime.datetime:
+            return date.strftime('%Y-%m-%d %H:%M:%S')
+        else:
+            return str(date)

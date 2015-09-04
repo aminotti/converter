@@ -4,6 +4,8 @@ from lxml import etree
 import sys
 import os
 
+from lib.rfc3339 import Rfc3339
+
 
 class BuildTag(object):
 
@@ -107,7 +109,7 @@ class BuildTag(object):
 
         simple = etree.SubElement(tag, "Simple")
         etree.SubElement(simple, "Name").text = "DATE_RELEASE"
-        etree.SubElement(simple, "String").text = episode['release'].strftime('%Y-%m-%d')
+        etree.SubElement(simple, "String").text = Rfc3339.reverse(episode['release'])
 
         simple = etree.SubElement(tag, "Simple")
         etree.SubElement(simple, "Name").text = "RATING"
