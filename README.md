@@ -2,33 +2,31 @@
 
 Convert video to h265 with constant quality and add mkv metadata and poster.
 
-## Requirement
+## Requirements
 
 * Handbrake
 * mvkmerge
 
-### Install for debian like system
+### Install requirements on debian like system
 
 * ``apt-get install ``
 
-## Library to build kvm globals tags file.
+## Install
 
-Search series ID with :
+* ``git clone https://github.com/aminotti/converter.git``
+* ``pip install -r requirements.txt``
 
-``http://thetvdb.com/api/GetSeries.php?seriesname=name&language=en``
+## Stage 1 : Build mkv tags file and attachments
 
-```python
-#!/usr/bin/env python
-# -*-coding:utf-8 -*
+Library to build kvm globals tags file.
 
-from lib.scrapper import TheTVDB
+Find id (series on http://thetvdb.com and movies on https://www.themoviedb.org) then run :
 
-
-if __name__ == '__main__':
-    serie, seasons, episodes = TheTVDB.getSerieInfos('257655')
-    print serie
-    print seasons
-    print episodes
+```bash
+cd converter
+./main.py -id <idmovie or idserie> [--film] -p </path/to/output/dir/>
 ```
 
-TODO : convert python data to XML file for mkv tags file
+## Stage 2 : user Handbrake and mkvmerge to build video file
+
+### TODO

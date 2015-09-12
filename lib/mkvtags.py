@@ -84,9 +84,12 @@ class BuildTag(object):
         root = etree.ElementTree(tags)
         # root.write(sys.stdout, pretty_print=True, xml_declaration=True, encoding="UTF8")
         filename = "{} ({}).xml".format(film['title'].encode('utf8'), film['release'].strftime('%Y'))
+        filename = filename.replace("/", "-")
         root.write(os.path.join(self.destination, filename), pretty_print=True, xml_declaration=True, encoding="UTF8")
-        urllib.urlretrieve(film['cover'], os.path.join(self.destination, 'cover{}'.format(os.path.splitext(film['cover'])[1])))
-        urllib.urlretrieve(film['cover_land'], os.path.join(self.destination, 'cover_land{}'.format(os.path.splitext(film['cover_land'])[1])))
+        if film['cover']:
+            urllib.urlretrieve(film['cover'], os.path.join(self.destination, 'cover{}'.format(os.path.splitext(film['cover'])[1])))
+        if film['cover_land']:
+            urllib.urlretrieve(film['cover_land'], os.path.join(self.destination, 'cover_land{}'.format(os.path.splitext(film['cover_land'])[1])))
 
     def serie(self, serie, seasons, episodes, lang='fre'):
         for episode in episodes:
@@ -105,6 +108,7 @@ class BuildTag(object):
             root = etree.ElementTree(Tags)
             # root.write(sys.stdout, pretty_print=True, xml_declaration=True, encoding="UTF8")
             filename = "{}-S{}E{}-{}.xml".format(serie['name'].encode('utf8'), str(episode['season']).zfill(2), str(episode['episode']).zfill(2), episode['title'].encode('utf8'))
+            filename = filename.replace("/", "-")
             root.write(os.path.join(self.destination, filename), pretty_print=True, xml_declaration=True, encoding="UTF8")
 
     def _buildSerie(self, tag, serie, lang):

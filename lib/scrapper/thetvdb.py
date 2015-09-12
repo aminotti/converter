@@ -75,7 +75,9 @@ class TheTVDB(object):
 
             # Seasons
             if seasonsid != ep['seasonid']:
-                seasons[ep['seasonid']] = {'id': ep['seasonid'], 'year': ep['release'].year, 'number': ep['season'], 'episodes': 0}
+                if type(ep['release']) is not str:
+                    ep['release'] = ep['release'].year
+                seasons[ep['seasonid']] = {'id': ep['seasonid'], 'year': ep['release'], 'number': ep['season'], 'episodes': 0}
                 seasonsid = ep['seasonid']
             seasons[ep['seasonid']]['episodes'] = seasons[ep['seasonid']]['episodes'] + 1
 

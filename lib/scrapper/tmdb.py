@@ -1,5 +1,6 @@
 # -*-coding:utf-8 -*
 
+import sys
 import json
 from urllib2 import Request, urlopen
 
@@ -41,8 +42,16 @@ class TheMDB(object):
         infos['vote'] = data['vote_average']
         infos['title'] = data['title']
         infos['original_title'] = data['original_title']
-        infos['cover'] = config['images']['secure_base_url'] + 'original' + data['poster_path']
-        infos['cover_land'] = config['images']['secure_base_url'] + 'original' + data['backdrop_path']
+        if data['poster_path']:
+            infos['cover'] = config['images']['secure_base_url'] + 'original' + data['poster_path']
+        else:
+            infos['cover'] = None
+            print >> sys.stderr, "Pas d'affiche disponible"
+        if data['backdrop_path']:
+            infos['cover_land'] = config['images']['secure_base_url'] + 'original' + data['backdrop_path']
+        else:
+            infos['cover_land'] = None
+            print >> sys.stderr, "Pas d'affiche paysage disponible"
         infos['genres'] = list()
         for g in data['genres']:
             infos['genres'].append(g['name'])
