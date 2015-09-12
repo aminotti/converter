@@ -24,7 +24,7 @@ Find id (series on http://thetvdb.com and movies on https://www.themoviedb.org) 
 
 ```bash
 cd converter
-./main.py -id <idmovie or idserie> [--film] -p </path/to/output/dir/>
+./main.py --id <idmovie or idserie> [--film] -p </path/to/output/dir/>
 ```
 
 ## Stage 2 : user Handbrake and mkvmerge to build video file
